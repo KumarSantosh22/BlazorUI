@@ -4,6 +4,16 @@
 
 <Component1></Component1>
 
-@code {
+<BlazorDropdown T="string" OnSelect="@OnSelection" DropdownItems="Languages"></BlazorDropdown>
+<h2>Data: @Data</h2>
 
+@code {
+    public List<string> Languages = new() { "C#", "Python", "JS", "TS", "Java" };
+    public string Data { get; set; }
+
+    public void OnSelection(string args)
+    {
+        Data = args;
+        Console.WriteLine($"Selected Item {args}");
+    }
 }
