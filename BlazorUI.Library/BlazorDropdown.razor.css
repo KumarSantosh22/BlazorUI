@@ -1,0 +1,11 @@
+﻿.blazor-dropdown {
+    margin: 4px 7px 2px 4px;
+    padding: 2px;
+}
+
+.blazor-dropdown-option {
+    margin: 4px 7px 2px 4px;
+    padding: 2px;
+    background: #ffffff;
+    color: red;
+}

@@ -1,0 +1,48 @@
+﻿@typeparam T
+@inject IJSRuntime jsRuntime;
+
+
+<select name="blazor-dropdown" id="blazor-dropdown" @bind="SelectedItem" @bind:after="OnChange">
+    @foreach (string dropdownItems in DropdownItems)
+    {
+        <option class="blazor-dropdown-option" value="@dropdownItems">
+            @dropdownItems
+        </option>
+    }
+</select>
+
+<h2>Item: @SelectedItem</h2>
+
+@code {
+    [Parameter]
+    public List<string> DropdownItems { get; set; } = new();
+
+    [Parameter]
+    public string SelectedItem { get; set; }
+
+    [Parameter]
+    public bool Required { get; set; } = false;
+
+    [Parameter]
+    public bool Disabled { get; set; } = false;
+
+    [Parameter]
+    public string Id { get; set; }
+
+    [Parameter]
+    public string Name { get; set; }
+
+    [Parameter]
+    public EventCallback<string> OnSelect { get; set; }
+
+    protected async override Task OnInitializedAsync()
+    {
+    }
+
+    public async Task OnChange()
+    {
+        await jsRuntime.InvokeVoidAsync("alert", "calling...");
+        await jsRuntime.InvokeVoidAsync("console.log", SelectedItem);
+        await OnSelect.InvokeAsync(SelectedItem);
+    }
+}
